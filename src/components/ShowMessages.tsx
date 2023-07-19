@@ -2,30 +2,23 @@ import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { MessageType } from "./types";
 import Message from "./Message";
-import Box from '@mui/material/Box';
-import SpeedDial from '@mui/material/SpeedDial';
-import SpeedDialAction from '@mui/material/SpeedDialAction';
-import FileCopyIcon from '@mui/icons-material/FileCopyOutlined';
-import SaveIcon from '@mui/icons-material/Save';
-import PrintIcon from '@mui/icons-material/Print';
-import ShareIcon from '@mui/icons-material/Share';
+
+import { ReactComponent as Camera } from '../assets/camera.svg';
+import { ReactComponent as Video } from '../assets/Video.svg';
+import { ReactComponent as File } from '../assets/File.svg';
+import { ReactComponent as Media } from '../assets/Media.svg';
+import { ReactComponent as Send } from '../assets/send.svg';
+import { ReactComponent as Traingle } from '../assets/Traingle.svg';
 
 
 const ShowMessages = () => {
     const [messages, setMessages] = useState<MessageType[]>([]);
     const [loading, setLoading] = useState(false);
     const [pageNumber, setPageNumber] = useState(0);
+    const [menu, setMenu] = useState(false);
 
     const [message, setMessage] = useState<string>("");
     const [issending, setIssending] = useState(false);
-
-    const actions = [
-        { icon: <FileCopyIcon />, name: 'Copy' },
-        { icon: <SaveIcon />, name: 'Save' },
-        { icon: <PrintIcon />, name: 'Print' },
-        { icon: <ShareIcon />, name: 'Share' },
-    ];
-
 
 
     const childRef = useRef<HTMLDivElement>(null);
@@ -103,6 +96,11 @@ const ShowMessages = () => {
         fetchMessages();
     }, []);
 
+    /* toggle media menu */
+    const toggleMenu = () => {
+        setMenu(!menu);
+    }
+
     const fetchMessages = async () => {
         try {
             setLoading(true);
@@ -129,9 +127,9 @@ const ShowMessages = () => {
     return (
         <>
             <div className="flex items-center">
-                <div className="w-[35%] md:w-[45%] h-[0.1rem] bg-gray-200 "></div>
-                <div className="w-[30%] md:w-[10%] text-center">12 June 2023</div>
-                <div className="w-[35%] md:w-[45%] h-[0.1rem] bg-gray-200"></div>
+                <div className="w-[35%] md:w-[45%] h-[0.1rem] bg-gray-300 "></div>
+                <div className="w-[30%] md:w-[10%] text-center text-gray-400">12 June 2023</div>
+                <div className="w-[35%] md:w-[45%] h-[0.1rem] bg-gray-300"></div>
             </div>
 
             <div className="h-[73vh] overflow-y-scroll" ref={childRef} onScroll={handleScroll}>
@@ -144,36 +142,45 @@ const ShowMessages = () => {
                 </div>
             </div>
 
-            <form onSubmit={handleSendMessage} className="shadow-lg mx-4 rounded-md h-fit flex items-center bg-white" >
+            <form onSubmit={handleSendMessage} className="rounded-lg h-fit flex items-center bg-white" >
                 <input
-                    className="block w-full rounded-md  mx-4 mb-1  bg-white py-4  pl-5 pr-12 text-sm font-small  focus:outline-none focus:ring-0"
+                    className="block w-full rounded-md  mx-4 mb-1  bg-white py-2  pl-5 pr-12 text-sm font-small  focus:outline-none focus:ring-0"
                     type="text"
                     placeholder={`Write Something to @Rohan`}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)} />
                 {
                     issending ? <div>sending...</div> :
-                        <div className="flex relative ">
+                        <div className="flex relative items-center">
+                            <div className="mt-2">
+                                {menu && (
+                                    <div className="absolute bottom-8 right-3 flex flex-col items-center">
+                                        <div className=" bg-[#008000] text-white flex p-2 rounded-md">
 
-                            <Box sx={{ transform: 'translateZ(0px)', flexGrow: 1 }}>
-                                <SpeedDial
-                                    ariaLabel="SpeedDial basic example"
-        
-                                    sx={{ position: 'absolute', bottom: -13,right:2 }}
-                                    icon={<i className="fa-solid fa-paperclip text-white mx-2" ></i>}
-                                >
-                                    {actions.map((action) => (
-                                        <SpeedDialAction
-                                            key={action.name}
-                                            icon={action.icon}
-                                            tooltipTitle={action.name}
-                                        />
-                                    ))}
-                                </SpeedDial>
-                            </Box>
+                                            <div className="mx-1  cursor-pointer">
+                                                <Camera />
+                                            </div>
 
-                            <button type="submit" disabled={issending} >
-                                <i className="fa-regular fa-paper-plane text-black mx-4" ></i>
+                                            <div className="mx-1 cursor-pointer">
+                                                <Video />
+                                            </div>
+                                            <div className="mx-1 cursor-pointer">
+                                                <File />
+                                            </div>
+                                        </div>
+                                        <Traingle />
+                                    </div>
+
+                                )}
+                                <button className="mx-4" onClick={toggleMenu}>
+
+                                    <Media />
+                                </button>
+                            </div>
+
+
+                            <button type="submit" disabled={issending} className="mr-4" >
+                                <Send />
                             </button>
 
                         </div>

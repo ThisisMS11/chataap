@@ -29,11 +29,11 @@ const User = () => {
 
                         <div className="flex items-center px-1">
                             <div className="text-sm text-gray-500">From</div>
-                            <div className="font-semibold ml-1">IGI Airport,T3</div>
+                            <div className="font-medium ml-1 text-lg">IGI Airport,T3</div>
                         </div>
                         <div className="flex items-center px-1">
                             <div className="text-sm text-gray-500 mr-2">To</div>
-                            <div className="font-semibold ml-1">Sector 28</div>
+                            <div className="font-medium ml-1 text-lg">Sector 28</div>
                         </div>
                     </div>
                 </div>

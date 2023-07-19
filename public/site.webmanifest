@@ -4,22 +4,16 @@
     "description": "An app that can helps you chat with others. ",
     "icons": [
         {
-            "src": "/public/maskable_icon.png",
-            "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "any maskable"
-        },
-        {
-            "src": "/public/maskable_icon.png",
-            "sizes": "128x128",
+            "src": "/chat180.png",
+            "sizes": "180x180",
             "type": "image/png",
             "purpose": "any"
         },
         {
-            "src": "/public/maskable_icon.png",
-            "sizes": "192x192",
+            "src": "/maskable_icon_x512.png",
+            "sizes": "512x512",
             "type": "image/png",
-            "purpose": "any maskable"
+            "purpose": "maskable"
         }
     ],
     "theme_color": "#171717",

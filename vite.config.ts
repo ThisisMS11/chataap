@@ -1,37 +1,32 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA, VitePWAOptions } from "vite-plugin-pwa";
+import svgr from "vite-plugin-svgr";
+
 // https://vitejs.dev/config/
 
 const manifestForPlugin: Partial<VitePWAOptions> = {
   registerType: 'prompt',
-  includeAssets: ['vite.svg'],
+  includeAssets: ["vite.svg"],
   manifest: {
-    name: "Chataap",
-    short_name: "cp",
-    description: "a normal chat application",
+    name: "chatapp",
+    short_name: "chatapp",
+    description: "An app that can helps you chat with others",
     icons: [
       {
-        src: "/public/maskable_icon.png",
+        src: "/chat180.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+      {
+        src: "/maskable_icon_x512.png",
         sizes: "512x512",
         type: "image/png",
-        purpose: "any maskable"
-      },
-      {
-        src: "/public/maskable_icon.png",
-        sizes: "128x128",
-        type: "image/png",
-        purpose: "any"
-      },
-      {
-        src: "/public/maskable_icon.png",
-        sizes: "192x192",
-        type: "image/png",
-        purpose: "any maskable"
+        purpose: "maskable"
       }
     ],
-    theme_color: "#ffffff",
-    background_color: "#000000",
+    theme_color: "#171717",
+    background_color: "#e8ebf2",
     display: 'standalone',
     scope: '/',
     start_url: '/',
@@ -41,5 +36,6 @@ const manifestForPlugin: Partial<VitePWAOptions> = {
 
 export default defineConfig({
   base: "./",
-  plugins: [react(), VitePWA(manifestForPlugin)],
+  plugins: [svgr(), react(), VitePWA(manifestForPlugin)],
+
 })
